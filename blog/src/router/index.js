@@ -17,6 +17,17 @@ const routes = [
     path: '/index',
     name: 'index',
     component: resolve => require(["@/views/index"], resolve),
+    children:[
+      {
+        path: "/",
+        redirect: '/list'
+      },
+      {
+        path: '/list',
+        name: 'list',
+        component: resolve => require(["@/views/articleList"], resolve),
+      }
+    ]
   },
 ]
 
