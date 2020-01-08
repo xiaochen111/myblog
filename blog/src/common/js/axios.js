@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { Toast } from 'vant';
 import qs from 'qs';
 
 // axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8'; 
@@ -22,7 +21,7 @@ axios.interceptors.response.use(response => {
     return response
 }, error => {
   if(error.message.search(/timeout/ig)!=-1){
-    Toast('网络超时，请重新再试')
+    alert('网络超时，请重新再试')
   }
   if (error && error.response) {
     // console.log(error)
@@ -51,19 +50,19 @@ axios.interceptors.response.use(response => {
         error.message = '请求411'
         break;
       case 500:
-        Toast('服务器端出错')
+        alert('服务器端出错')
         error.message = '服务器端出错'
         break;
       case 501:
-        Toast('网络未实现')
+        alert('网络未实现')
         error.message = '网络未实现'
         break;
       case 502:
-        Toast('网络错误')
+        alert('网络错误')
         error.message = '网络错误'
         break;
       case 503:
-        Toast('服务不可用')
+        alert('服务不可用')
         error.message = '服务不可用'
         break;
       case 504:
@@ -84,7 +83,6 @@ axios.interceptors.response.use(response => {
 
 export async function post(url,data={}){
   let method = 'POST';
-  url = `/cashier${url}`;
   data = qs.stringify(data)
   try {
     let res = await axios({url,data,method});
