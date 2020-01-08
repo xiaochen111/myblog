@@ -9,9 +9,8 @@ class HomeController extends Controller {
   }
   async list() {
     const { ctx } = this;
-    ctx.body = {
-      id: 1,
-    };
+    const user = await ctx.service.user.find();
+    ctx.body = user;
   }
 }
 
