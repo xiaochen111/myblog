@@ -13,6 +13,11 @@ const routes = [
     name: 'home',
     component: resolve => require(["@/views/home"], resolve),
   },
+  {
+    path: '/index',
+    name: 'index',
+    component: resolve => require(["@/views/index"], resolve),
+  },
 ]
 
 const router = new VueRouter({
