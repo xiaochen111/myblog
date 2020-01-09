@@ -8,13 +8,17 @@ import 'fullpage.js/vendors/scrolloverflow' // Optional. When using scrollOverfl
 import VueFullPage from 'vue-fullpage.js'
 Vue.use(VueFullPage);
 
+
 import 'reset-css';
 
-
 Vue.config.productionTip = false
+
 
 new Vue({
   router,
   store,
   render: h => h(App)
 }).$mount('#app')
+
+
+// https://www.flqin.com/#page2
