@@ -17,7 +17,7 @@
             sideNav,
         },
         created() {
-            getDbArt();
+            // getDbArt();
         },
     }
 </script>
