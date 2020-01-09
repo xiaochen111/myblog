@@ -36,7 +36,7 @@
                     background-color: #ccc;cursor: pointer; color: #fff;
                 }
                 a{
-                    text-decoration: none; color: @darkColor;
+                    text-decoration: none; color: @darkColor; display: block;
                 }
             }
         }
