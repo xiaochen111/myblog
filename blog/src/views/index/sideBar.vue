@@ -5,7 +5,9 @@
                 前端博客
             </div>
             <ul>
-                <li>首页</li>
+                <li>
+                    <router-link to="/list">首页</router-link>    
+                </li>
             </ul>
         </div>
     </div>
@@ -32,6 +34,9 @@
                 font-size: 14px; color: @darkColor;
                 &:hover{
                     background-color: #ccc;cursor: pointer; color: #fff;
+                }
+                a{
+                    text-decoration: none; color: @darkColor;
                 }
             }
         }

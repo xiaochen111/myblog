@@ -2,7 +2,9 @@
     <div class="list">
         <ul>
             <li v-for="(item,index) in list" :key="index">
-                {{ item.title }}{{index+1}}
+                <router-link to="/detail">
+                    {{ item.title }}{{index+1}}
+                </router-link>
             </li>
         </ul>
     </div>
@@ -42,6 +44,9 @@
             line-height: 40px; border-bottom:1px solid @border;
             &:hover{
                 cursor: pointer;
+            }
+            a{
+                text-decoration: none; color: @darkColor;
             }
         }
     }
