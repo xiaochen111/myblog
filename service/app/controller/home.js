@@ -15,7 +15,8 @@ class HomeController extends Controller {
   }
   async getMdContent() {
     const { ctx } = this;
-    const res = await ctx.service.getArticleSerice.getDemoMd();
+    const { fileName } = ctx.request.body;
+    const res = await ctx.service.getArticleSerice.getDemoMd(fileName);
     ctx.body = res;
   }
 }
