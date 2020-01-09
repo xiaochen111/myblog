@@ -6,7 +6,10 @@
             </div>
             <ul>
                 <li>
-                    <router-link to="/list">首页</router-link>    
+                    <router-link to="/list">文章</router-link>    
+                </li>
+                <li>
+                    <router-link to="/edit">写文章</router-link>    
                 </li>
             </ul>
         </div>

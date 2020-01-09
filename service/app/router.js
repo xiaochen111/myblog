@@ -8,4 +8,6 @@ module.exports = app => {
   router.get('/', controller.home.index);
   router.post('/blog/list', controller.home.list);
   router.post('/blog/md', controller.home.getMdContent);
+  router.post('/blog/dbArt', controller.home.getDbArt);
+  router.post('/blog/writeArt', controller.home.writeArt);
 };

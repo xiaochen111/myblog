@@ -19,6 +19,17 @@ class HomeController extends Controller {
     const res = await ctx.service.getArticleSerice.getDemoMd(fileName);
     ctx.body = res;
   }
+  async writeArt() {
+    const { ctx } = this;
+    const { title, value } = ctx.request.body;
+    const res = await ctx.service.getArticleSerice.writeArtcle(title, value);
+    ctx.body = { code: res };
+  }
+  async getDbArt() {
+    const { ctx } = this;
+    const res = await ctx.service.getArticleSerice.getDatabaseList();
+    ctx.body = res;
+  }
 }
 
 

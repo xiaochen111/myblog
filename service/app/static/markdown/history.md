@@ -1,165 +1,131 @@
-# History 对象
+#### session cookie
 
-## 概述
+1、cookie数据存放在客户的浏览器上，session数据放在服务器上。
 
-`window.history`属性指向 History 对象，它表示当前窗口的浏览历史。
+2、cookie不是很安全，别人可以分析存放在本地的COOKIE并进行COOKIE欺骗
+   考虑到安全应当使用session。
 
-History 对象保存了当前窗口访问过的所有页面网址。下面代码表示当前窗口一共访问过3个网址。
+3、session会在一定时间内保存在服务器上。当访问增多，会比较占用你服务器的性能
+   考虑到减轻服务器性能方面，应当使用COOKIE。
 
-```javascript
-window.history.length // 3
-```
+4、单个cookie保存的数据不能超过4K，很多浏览器都限制一个站点最多保存20个cookie。
 
-由于安全原因，浏览器不允许脚本读取这些地址，但是允许在地址之间导航。
+5、所以个人建议：
+   将登陆信息等重要信息存放为SESSION
+   其他信息如果需要保留，可以放在COOKIE中
 
-```javascript
-// 后退到前一个网址
-history.back()
 
-// 等同于
-history.go(-1)
-```
 
-浏览器工具栏的“前进”和“后退”按钮，其实就是对 History 对象进行操作。
 
-## 属性
+++注：session 有跨域的问题 （后台项目一个端口，前台项目一个端口）++
 
-History 对象主要有两个属性。
 
-- `History.length`：当前窗口访问过的网址数量（包括当前网页）
-- `History.state`：History 堆栈最上层的状态值（详见下文）
 
-```javascript
-// 当前窗口访问过多少个网页
-window.history.length // 1
 
-// History 对象的当前状态
-// 通常是 undefined，即未设置
-window.history.state // undefined
-```
+---
 
-## 方法
+[http缓存与cdn缓存配置指南](https://juejin.im/post/5be3f486e51d45053d5c38ca)
 
-### History.back()、History.forward()、History.go()
+![image](https://note.youdao.com/yws/api/personal/file/DA4912567F384F0588C7F600C39F4A0F?method=download&shareKey=7e5ec7fbdce8e46cf341ccd883780364)
+---
 
-这三个方法用于在历史之中移动。
 
-- `History.back()`：移动到上一个网址，等同于点击浏览器的后退键。对于第一个访问的网址，该方法无效果。
-- `History.forward()`：移动到下一个网址，等同于点击浏览器的前进键。对于最后一个访问的网址，该方法无效果。
-- `History.go()`：接受一个整数作为参数，以当前网址为基准，移动到参数指定的网址，比如`go(1)`相当于`forward()`，`go(-1)`相当于`back()`。如果参数超过实际存在的网址范围，该方法无效果；如果不指定参数，默认参数为`0`，相当于刷新当前页面。
 
-```javascript
-history.back();
-history.forward();
-history.go(-2);
-```
+## 前端本地存储方式
 
-`history.go(0)`相当于刷新当前页面。
+#### cookie
 
-```javascript
-history.go(0); // 刷新当前页面
-```
+==如何工作==
 
-注意，移动到以前访问过的页面时，页面通常是从浏览器缓存之中加载，而不是重新要求服务器发送新的网页。
+++当网页要发http请求时，浏览器会先检查是否有相应的cookie，有则自动添加在request header中的cookie字段中++。这些是浏览器自动帮我们做的，而且每一次http请求浏览器都会自动帮我们做。这个特点很重要，因为这关系到“什么样的数据适合存储在cookie中”。
 
-### History.pushState()，
+注：因为存储在cookie中的数据，每次都会被浏览器自动放在http请求中，所以无用的数据不要随便存储在cookie中，否则增加了网络的开销
 
-`History.pushState()`方法用于在历史中添加一条记录。
 
-```javascript
-window.history.pushState(state, title, url)
-```
+==特征==
+1. 不同的浏览器存放的cookie位置不一样，也是不能通用的。
+2. cookie的存储是以域名形式进行区分的，不同的域下存储的cookie是独立的。
+3. 我们可以设置cookie生效的域（当前设置cookie所在域的子域），也就是说，我们能够操作的cookie是当前域以及当前域下的所有子域
+4. 一个域名下存放的cookie的个数是有限制的，不同的浏览器存放的个数不一样,一般为20个
+5. 每个cookie存放的内容大小也是有限制的，不同的浏览器存放大小不一样，一般为4KB
+6. cookie也可以设置过期的时间，默认是会话结束的时候，当时间到期自动销毁
+cookie值既可以设置，也可以读取
 
-该方法接受三个参数，依次为：
 
-- `state`：一个与添加的记录相关联的状态对象，主要用于`popstate`事件。该事件触发时，该对象会传入回调函数。也就是说，浏览器会将这个对象序列化以后保留在本地，重新载入这个页面的时候，可以拿到这个对象。如果不需要这个对象，此处可以填`null`。
-- `title`：新页面的标题。但是，现在所有浏览器都忽视这个参数，所以这里可以填空字符串。
-- `url`：新的网址，必须与当前页面处在同一个域。浏览器的地址栏将显示这个网址。
 
-假定当前网址是`example.com/1.html`，使用`pushState()`方法在浏览记录（History 对象）中添加一个新记录。
 
-```javascript
-var stateObj = { foo: 'bar' };
-history.pushState(stateObj, 'page 2', '2.html');
-```
+++注：服务端如果响应时 设置cookie 如果端口不同(跨域) 浏览器也拿不到cookie++
 
-添加新记录后，浏览器地址栏立刻显示`example.com/2.html`，但并不会跳转到`2.html`，甚至也不会检查`2.html`是否存在，它只是成为浏览历史中的最新记录。这时，在地址栏输入一个新的地址(比如访问`google.com`)，然后点击了倒退按钮，页面的 URL 将显示`2.html`；你再点击一次倒退按钮，URL 将显示`1.html`。
 
-总之，`pushState()`方法不会触发页面刷新，只是导致 History 对象发生变化，地址栏会有反应。
 
-使用该方法之后，就可以用`History.state`属性读出状态对象。
+#### Cookie 的属性
 
-```javascript
-var stateObj = { foo: 'bar' };
-history.pushState(stateObj, 'page 2', '2.html');
-history.state // {foo: "bar"}
-```
+> Expires，Max-Age
 
-如果`pushState`的 URL 参数设置了一个新的锚点值（即`hash`），并不会触发`hashchange`事件。反过来，如果 URL 的锚点值变了，则会在 History 对象创建一条浏览记录。
+`Expires`属性指定一个具体的到期时间，到了指定时间以后，浏览器就不再保留这个 Cookie。它的值是 UTC 格式，可以使用Date.prototype.toUTCString()进行格式转换。
 
-如果`pushState()`方法设置了一个跨域网址，则会报错。
+如果不设置该属性，或者设为`null`，Cookie 只在当前会话（session）有效，浏览器窗口一旦关闭，当前 Session 结束，该 Cookie 就会被删除。另外，浏览器根据本地时间，决定 Cookie 是否过期，由于本地时间是不精确的，所以没有办法保证 Cookie 一定会在服务器指定的时间过期。
 
-```javascript
-// 报错
-// 当前网址为 http://example.com
-history.pushState(null, '', 'https://twitter.com/hello');
-```
+`Max-Age`属性指定从现在开始 Cookie 存在的秒数，比如60 * 60 * 24 * 365（即一年）。过了这个时间以后，浏览器就不再保留这个 Cookie。
 
-上面代码中，`pushState`想要插入一个跨域的网址，导致报错。这样设计的目的是，防止恶意代码让用户以为他们是在另一个网站上，因为这个方法不会导致页面跳转。
+如果同时指定了`Expires`和`Max-Age`，那么`Max-Age`的值将优先生效。
 
-### History.replaceState()
+如果`Set-Cookie`字段没有指定`Expires`或`Max-Age`属性，那么这个 Cookie 就是 Session Cookie，即它只在本次对话存在，一旦用户关闭浏览器，浏览器就不会再保留这个 Cookie。
 
-`History.replaceState()`方法用来修改 History 对象的当前记录，其他都与`pushState()`方法一模一样。
+---
 
-假定当前网页是`example.com/example.html`。
+#### Session 和 Cookie 区别
 
-```javascript
-history.pushState({page: 1}, 'title 1', '?page=1')
-// URL 显示为 http://example.com/example.html?page=1
+Session 是服务器用来跟踪用户的一种手段，每个 Session 都有一个唯一标识：Session ID。当服务器创建了一个 Session 时，给客户端发送的响应报文包含了 Set-Cookie 字段，其中有一个名为 sid 的键值对，这个键值对就是 Session ID。客户端收到后就把 Cookie 保存在浏览器中，并且之后发送的请求报文都包含 Session ID。HTTP 就是通过 Session 和 Cookie 这两种方式一起合作来实现跟踪用户状态的，Session 用于服务器端，Cookie 用于客户端。
 
-history.pushState({page: 2}, 'title 2', '?page=2');
-// URL 显示为 http://example.com/example.html?page=2
 
-history.replaceState({page: 3}, 'title 3', '?page=3');
-// URL 显示为 http://example.com/example.html?page=3
+#### HTTP 状态码
 
-history.back()
-// URL 显示为 http://example.com/example.html?page=1
+服务器返回的  **响应报文**  中第一行为状态行，包含了状态码以及原因短语，用来告知客户端请求的结果。
 
-history.back()
-// URL 显示为 http://example.com/example.html
+| 状态码 | 类别 | 原因短语 |
+| :---: | :---: | :---: |
+| 1XX | Informational（信息性状态码） | 接收的请求正在处理 |
+| 2XX | Success（成功状态码） | 请求正常处理完毕 |
+| 3XX | Redirection（重定向状态码） | 需要进行附加操作以完成请求 |
+| 4XX | Client Error（客户端错误状态码） | 服务器无法处理请求 |
+| 5XX | Server Error（服务器错误状态码） | 服务器处理请求出错 |
 
-history.go(2)
-// URL 显示为 http://example.com/example.html?page=3
-```
 
-## popstate 事件
+> 2XX 成功
 
-每当同一个文档的浏览历史（即`history`对象）出现变化时，就会触发`popstate`事件。
+-  **200 OK** 
 
-注意，仅仅调用`pushState()`方法或`replaceState()`方法 ，并不会触发该事件，只有用户点击浏览器倒退按钮和前进按钮，或者使用 JavaScript 调用`History.back()`、`History.forward()`、`History.go()`方法时才会触发。另外，该事件只针对同一个文档，如果浏览历史的切换，导致加载不同的文档，该事件也不会触发。
+-  **204 No Content** ：请求已经成功处理，但是返回的响应报文不包含实体的主体部分。一般在只需要从客户端往服务器发送信息，而不需要返回数据时使用。
 
-使用的时候，可以为`popstate`事件指定回调函数。
+-  **206 Partial Content** ：表示客户端进行了范围请求。响应报文包含由 Content-Range 指定范围的实体内容。
 
-```javascript
-window.onpopstate = function (event) {
-  console.log('location: ' + document.location);
-  console.log('state: ' + JSON.stringify(event.state));
-};
+> 3XX 重定向   （如：a->b但却a->c  重定向到c）
 
-// 或者
-window.addEventListener('popstate', function(event) {
-  console.log('location: ' + document.location);
-  console.log('state: ' + JSON.stringify(event.state));
-});
-```
+-  **301 Moved Permanently** ：永久性重定向
 
-回调函数的参数是一个`event`事件对象，它的`state`属性指向`pushState`和`replaceState`方法为当前 URL 所提供的状态对象（即这两个方法的第一个参数）。上面代码中的`event.state`，就是通过`pushState`和`replaceState`方法，为当前 URL 绑定的`state`对象。
+-  **302 Found** ：临时性重定向
 
-这个`state`对象也可以直接通过`history`对象读取。
+-  **303 See Other** ：和 302 有着相同的功能，但是 303 明确要求客户端应该采用 GET 方法获取资源。
 
-```javascript
-var currentState = history.state;
-```
+- 注：虽然 HTTP 协议规定 301、302 状态下重定向时不允许把 POST 方法改成 GET 方法，但是大多数浏览器都会在 301、302 和 303 状态下的重定向把 POST 方法改成 GET 方法。
 
-注意，页面第一次加载的时候，浏览器不会触发`popstate`事件。
+-  **304 Not Modified** ：如果请求报文首部包含一些条件，例如：If-Match，If-ModifiedSince，If-None-Match，If-Range，If-Unmodified-Since，如果不满足条件，则服务器会返回 304 状态码。
+
+-  **307 Temporary Redirect** ：临时重定向，与 302 的含义类似，但是 307 要求浏览器不会把重定向请求的 POST 方法改成 GET 方法。
+
+> ==4XX 客户端错误==
+
+-  **400 Bad Request** ：请求报文中存在语法错误。
+
+-  **401 Unauthorized** ：该状态码表示发送的请求需要有认证信息（BASIC 认证、DIGEST 认证）。如果之前已进行过一次请求，则表示用户认证失败。
+
+-  **403 Forbidden** ：请求被拒绝，服务器端没有必要给出拒绝的详细理由。
+
+-  **404 Not Found** 
+
+> ==5XX 服务器错误==
+
+-  **500 Internal Server Error** ：服务器正在执行请求时发生错误。
+
+-  **503 Service Unavilable** ：服务器暂时处于超负载或正在进行停机维护，现在无法处理请求。

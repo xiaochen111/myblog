@@ -10,12 +10,8 @@
 
 
 <script>
-    import VueMarkdown from 'vue-markdown'
     import { list } from '@/common/api';
     export default {
-        components:{
-            VueMarkdown
-        },
         data() {
             return {
                 list:[]

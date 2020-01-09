@@ -24,5 +24,16 @@ async function readFileList(filePath) {
   });
 }
 
-module.exports = { readFile, readFileList };
+async function writeFile(filePath, buffer) {
+  return new Promise((resolve, reject) => {
+    fs.writeFile(filePath, buffer, err => {
+      // 读取错误则调用 reject
+      if (err) return reject(err);
+      // 读取成功则调用 resolve
+      return resolve('1');
+    });
+  });
+}
+
+module.exports = { readFile, readFileList, writeFile };
 

@@ -10,14 +10,14 @@
 </template>
 
 <script>
-    import { list } from '@/common/api'
+    import { getDbArt } from '@/common/api'
     import sideNav from './sideBar'
     export default {
         components:{
             sideNav,
         },
         created() {
-            list();
+            getDbArt();
         },
     }
 </script>

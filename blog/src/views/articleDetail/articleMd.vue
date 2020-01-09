@@ -1,15 +1,16 @@
 <template>
     <div class="list">
-        <vue-markdown :source="content" class="markdown-body"/>
+        <MarkdownPreview :initialValue="content"/>
     </div>
 </template>
 
 
 <script>
     import { getMd } from '@/common/api'
+    import { MarkdownPreview } from 'vue-meditor'
     export default {
         components:{
-            VueMarkdown:resolve => require(["vue-markdown"], resolve),
+            MarkdownPreview,
         },
         data() {
             return {
