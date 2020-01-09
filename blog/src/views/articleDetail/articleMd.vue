@@ -17,11 +17,12 @@
             }
         },
         created() {
-            this.getMdContent()
+            let fileName = this.$route.query.fileName
+            this.getMdContent({fileName})
         },
         methods: {
-            async getMdContent(){
-                let res = await getMd();
+            async getMdContent(params){
+                let res = await getMd(params);
                 this.content = res;
             }
         },

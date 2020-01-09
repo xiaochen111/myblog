@@ -1,10 +1,8 @@
 <template>
     <div class="list">
         <ul>
-            <li v-for="(item,index) in list" :key="index">
-                <router-link to="/detail">
-                    {{ item.title }}{{index+1}}
-                </router-link>
+            <li v-for="(item,index) in list" :key="index" @click="toDetail(item)">
+                {{ item }}
             </li>
         </ul>
     </div>
@@ -30,6 +28,12 @@
             async getlist(){
                 let res = await list();
                 this.list = res;
+            },
+            toDetail(fileName){
+                this.$router.push({
+                    path:'/detail',
+                    query:{fileName}
+                })
             }
         },
     }
