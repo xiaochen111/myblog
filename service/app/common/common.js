@@ -13,4 +13,16 @@ async function readFile(filePath) {
   });
 }
 
-module.exports = readFile;
+async function readFileList(filePath) {
+  return new Promise((resolve, reject) => {
+    fs.readdir(filePath, (err, content) => {
+      // 读取错误则调用 reject
+      if (err) return reject(err);
+      // 读取成功则调用 resolve
+      return resolve(content.toString());
+    });
+  });
+}
+
+module.exports = { readFile, readFileList };
+
