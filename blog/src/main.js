@@ -10,6 +10,7 @@ Vue.use(VueFullPage);
 
 
 import 'reset-css';
+import 'github-markdown-css'
 
 Vue.config.productionTip = false
 

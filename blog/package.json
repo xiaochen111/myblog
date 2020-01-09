@@ -10,6 +10,7 @@
     "axios": "^0.19.0",
     "better-scroll": "^1.15.2",
     "core-js": "^3.4.3",
+    "github-markdown-css": "^3.0.1",
     "reset-css": "^5.0.1",
     "vue": "^2.6.10",
     "vue-fullpage.js": "^0.1.5",
