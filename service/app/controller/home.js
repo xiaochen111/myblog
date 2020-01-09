@@ -9,8 +9,14 @@ class HomeController extends Controller {
   }
   async list() {
     const { ctx } = this;
-    const user = await ctx.service.user.find();
-    ctx.body = user;
+    // const user = await ctx.service.user.find();
+    const res = await ctx.service.getArticleSerice.getList();
+    ctx.body = res;
+  }
+  async getMdContent() {
+    const { ctx } = this;
+    const res = await ctx.service.getArticleSerice.getDemoMd();
+    ctx.body = res;
   }
 }
 
