@@ -37,4 +37,12 @@
     .list{
         box-sizing: border-box; padding: 30px 20px;
     }
+    ul{
+        li{
+            line-height: 40px; border-bottom:1px solid @border;
+            &:hover{
+                cursor: pointer;
+            }
+        }
+    }
 </style>
