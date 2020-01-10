@@ -55,6 +55,7 @@ module.exports = {
         //     return args;
         // });
         config.resolve.alias.set('@', resolve('src'))
+        // config.resolve.alias.set('vue$', 'vue/dist/vue.esm.js')
     },
 
     
