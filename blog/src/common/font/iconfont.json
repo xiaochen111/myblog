@@ -1,0 +1,44 @@
+{
+  "id": "1549802",
+  "name": "myproject",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1964580",
+      "name": "订单管理",
+      "font_class": "dingdanguanli",
+      "unicode": "e6a5",
+      "unicode_decimal": 59045
+    },
+    {
+      "icon_id": "3279807",
+      "name": "交易管理",
+      "font_class": "jiaoyiguanli",
+      "unicode": "e66b",
+      "unicode_decimal": 58987
+    },
+    {
+      "icon_id": "4520160",
+      "name": "分类",
+      "font_class": "fenlei",
+      "unicode": "e689",
+      "unicode_decimal": 59017
+    },
+    {
+      "icon_id": "6664109",
+      "name": "tips-2",
+      "font_class": "tips-",
+      "unicode": "e6c6",
+      "unicode_decimal": 59078
+    },
+    {
+      "icon_id": "9814115",
+      "name": "tips_careful",
+      "font_class": "tips_careful",
+      "unicode": "e688",
+      "unicode_decimal": 59016
+    }
+  ]
+}
