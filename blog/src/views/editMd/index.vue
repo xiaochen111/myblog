@@ -28,9 +28,9 @@ export default {
     async save(){
       let res = await writeArt(this.source)
       if(res.code == 1){
-        alert('保存成功！')
+        this.$message.success('保存成功！');
       }else{
-        alert('保存失败！')
+        this.$message.success('保存失败！');
       }
     }
   },

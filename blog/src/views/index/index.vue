@@ -16,6 +16,7 @@
             sideNav,
         },
         created() {
+            // this.$message.success('成功！');
         },
     }
 </script>
