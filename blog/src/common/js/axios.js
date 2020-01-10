@@ -1,5 +1,7 @@
 import axios from 'axios';
 import qs from 'qs';
+import Message from "../../components/message"
+
 
 // axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8'; 
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'; 
@@ -21,7 +23,7 @@ axios.interceptors.response.use(response => {
     return response
 }, error => {
   if(error.message.search(/timeout/ig)!=-1){
-    alert('网络超时，请重新再试')
+    Message.fail('网络超时，请重新再试')
   }
   if (error && error.response) {
     // console.log(error)
@@ -50,19 +52,19 @@ axios.interceptors.response.use(response => {
         error.message = '请求411'
         break;
       case 500:
-        alert('服务器端出错')
+        Message.fail('服务器端出错')
         error.message = '服务器端出错'
         break;
       case 501:
-        alert('网络未实现')
+        Message.fail('网络未实现')
         error.message = '网络未实现'
         break;
       case 502:
-        alert('网络错误')
+        Message.fail('网络错误')
         error.message = '网络错误'
         break;
       case 503:
-        alert('服务不可用')
+        Message.fail('服务不可用')
         error.message = '服务不可用'
         break;
       case 504:

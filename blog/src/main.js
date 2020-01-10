@@ -6,10 +6,15 @@ import store from './store'
 
 import 'fullpage.js/vendors/scrolloverflow' // Optional. When using scrollOverflow:true
 import VueFullPage from 'vue-fullpage.js'
-Vue.use(VueFullPage);
+import install from './common/js/install'
+
+Vue.use(VueFullPage)
+  .use(install);
 
 
 import 'reset-css';
+import '@/common/font/iconfont.css'
+import '@/common/font/iconfont'
 
 Vue.config.productionTip = false
 
