@@ -9,6 +9,9 @@
                     <router-link to="/list">文章</router-link>    
                 </li>
                 <li>
+                    <router-link to="/listDb">文章DB</router-link>    
+                </li>
+                <li>
                     <router-link to="/edit">写文章</router-link>    
                 </li>
             </ul>

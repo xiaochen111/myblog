@@ -28,6 +28,11 @@ const routes = [
         component: resolve => require(["@/views/articleList"], resolve),
       },
       {
+        path: '/listDb',
+        name: 'listDb',
+        component: resolve => require(["@/views/articleDbList"], resolve),
+      },
+      {
         path: '/detail',
         name: 'detail',
         component: resolve => require(["@/views/articleDetail/articleMd"], resolve),
