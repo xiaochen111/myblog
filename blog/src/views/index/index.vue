@@ -10,14 +10,12 @@
 </template>
 
 <script>
-    import { getDbArt } from '@/common/api'
     import sideNav from './sideBar'
     export default {
         components:{
             sideNav,
         },
         created() {
-            // getDbArt();
         },
     }
 </script>
