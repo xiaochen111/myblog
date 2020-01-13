@@ -9,7 +9,6 @@ class HomeController extends Controller {
   }
   async list() {
     const { ctx } = this;
-    // const user = await ctx.service.user.find();
     const res = await ctx.service.getArticleSerice.getList();
     ctx.body = res;
   }
@@ -36,6 +35,13 @@ class HomeController extends Controller {
     const { title, value } = ctx.request.body;
     const res = await ctx.service.getArticleSerice.writeArtcleDb(title, value);
     ctx.body = res;
+  }
+
+  async login() {
+    const { ctx } = this;
+    const { username, password } = ctx.request.body;
+    const user = await ctx.service.user.login({ username, password });
+    ctx.body = user;
   }
 }
 
