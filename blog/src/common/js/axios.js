@@ -32,6 +32,7 @@ axios.interceptors.response.use(response => {
         error.message = '错误请求'
         break;
       case 401:
+        location.hash = '#/login'
         error.message = '未授权，请重新登录'
         break;
       case 403:

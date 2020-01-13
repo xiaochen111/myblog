@@ -11,18 +11,13 @@
 
 <script>
     import sideNav from './sideBar'
-    import { mapState, mapMutations } from 'vuex'
     export default {
         components:{
             sideNav,
         },
         created() {
             // this.$message.success('成功！');
-             console.log(this.loginInfo)
         },
-        computed:{
-            ...mapState(['loginState','loginInfo'])
-        }
     }
 </script>
 

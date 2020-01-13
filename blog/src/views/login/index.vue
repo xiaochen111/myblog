@@ -17,6 +17,8 @@
 
 <script>
     import { login } from '@/common/api'
+    import { mapMutations } from 'vuex'
+    import { SET_LOGIN_INFOR } from '@/store/moutations-types'
     export default {
         data() {
             return {
@@ -24,9 +26,16 @@
             }
         },
         methods: {
+            ...mapMutations([SET_LOGIN_INFOR]),
             async loginSubimt(){
                 let res = await login(this.loginParams);
-                console.log(res)
+                let { user,code } = res;
+                if(res.code === 1){
+                    this.SET_LOGIN_INFOR({ loginState:true, loginInfor:user});
+                    this.$router.push({
+                        path:'/list'
+                    })
+                }
             }
         },
     }

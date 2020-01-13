@@ -1,7 +1,8 @@
-import { GET_LOGIN_STATE } from "./moutations-types"
+import { SET_LOGIN_INFOR } from "./moutations-types"
 
 let mutations = {
-    [GET_LOGIN_STATE](state, loginState) {
+    [SET_LOGIN_INFOR](state, { loginState, loginInfor}) {
+        state.loginInfor = loginInfor;
         state.loginState = loginState
     },
 }

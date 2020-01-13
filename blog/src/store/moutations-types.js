@@ -1,1 +1,1 @@
-export const GET_LOGIN_STATE = 'GET_LOGIN_STATE'
+export const SET_LOGIN_INFOR = 'SET_LOGIN_INFOR' 
