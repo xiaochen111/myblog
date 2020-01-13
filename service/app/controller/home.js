@@ -30,6 +30,13 @@ class HomeController extends Controller {
     const res = await ctx.service.getArticleSerice.getDatabaseList();
     ctx.body = res;
   }
+
+  async writeArtcleDb() {
+    const { ctx } = this;
+    const { title, value } = ctx.request.body;
+    const res = await ctx.service.getArticleSerice.writeArtcleDb(title, value);
+    ctx.body = res;
+  }
 }
 
 

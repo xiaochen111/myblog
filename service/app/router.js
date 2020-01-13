@@ -10,4 +10,5 @@ module.exports = app => {
   router.post('/blog/md', controller.home.getMdContent);
   router.post('/blog/dbArt', controller.home.getDbArt);
   router.post('/blog/writeArt', controller.home.writeArt);
+  router.post('/blog/writeArtcleDb', controller.home.writeArtcleDb);
 };

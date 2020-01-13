@@ -22,6 +22,12 @@ class ArticleService extends Service {
     return result;
   }
 
+  async writeArtcleDb(title, buffer) {
+    const result = await this.app.mysql.insert('article', { title, createTime: new Date(), content: buffer });
+    result.code = result.affectedRows === 1 ? 1 : 0;
+    return result;
+  }
+
   async writeArtcle(fileName, buffer) {
     const writePath = path.join(__dirname, `../static/markdown/${fileName}.md`);
     const result = await writeFile(writePath, buffer);

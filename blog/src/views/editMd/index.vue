@@ -11,7 +11,7 @@
 
 <script>
 import Markdown from "vue-meditor";
-import { writeArt } from '@/common/api'
+import { writeArt, writeArtcleDb } from '@/common/api'
 export default {
   components: {
     Markdown
@@ -26,11 +26,12 @@ export default {
   },
   methods: {
     async save(){
-      let res = await writeArt(this.source)
+      // let res = await writeArt(this.source)
+      let res = await writeArtcleDb(this.source)
       if(res.code == 1){
         this.$message.success('保存成功！');
       }else{
-        this.$message.success('保存失败！');
+        this.$message.fail('保存失败！');
       }
     }
   },

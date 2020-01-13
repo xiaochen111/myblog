@@ -13,3 +13,6 @@ export function getDbArt(){
 export function writeArt(params = {}){
     return post('/blog/writeArt',params)
 }
+export function writeArtcleDb(params = {}){
+    return post('/blog/writeArtcleDb',params)
+}
