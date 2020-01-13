@@ -44,6 +44,11 @@ const routes = [
       }
     ]
   },
+  {
+    path: '/login',
+    name: 'login',
+    component: resolve => require(["@/views/login"], resolve),
+  },
 ]
 
 const router = new VueRouter({
