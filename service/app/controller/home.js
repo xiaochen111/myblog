@@ -40,8 +40,15 @@ class HomeController extends Controller {
   async login() {
     const { ctx } = this;
     const { username, password } = ctx.request.body;
-    const user = await ctx.service.user.login({ username, password });
-    ctx.body = user;
+    const res = await ctx.service.user.login({ username, password });
+    const { code, user } = res;
+    if (code === 1) {
+      ctx.cookies.set('username', user.username, {
+        encrypt: true, // 加密传输
+      });
+      ctx.session[user.username] = true;
+    }
+    ctx.body = { code };
   }
 }
 

@@ -4,9 +4,16 @@ const Service = require('egg').Service;
 
 class UserService extends Service {
   async login({ username, password }) {
-    const user = await this.app.mysql.select('user', { username, password });
-    console.log(typeof user);
-    return user;
+    const userList = await this.app.mysql.select('user', {
+      where: { username, password },
+    });
+    if (Array.isArray(userList) && userList.length > 0) {
+      return {
+        code: 1,
+        user: userList[0],
+      };
+    }
+    return { code: 0 };
   }
 }
 

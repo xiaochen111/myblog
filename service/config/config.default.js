@@ -22,7 +22,7 @@ module.exports = appInfo => {
   config.keys = appInfo.name + '_1578455645058_1425';
 
   // add your middleware config here
-  config.middleware = [];
+  config.middleware = [ ];
 
   config.mysql = {
     // 单数据库信息配置
@@ -42,6 +42,13 @@ module.exports = appInfo => {
     app: true,
     // 是否加载到 agent 上，默认关闭
     agent: false,
+  };
+
+  config.session = {
+    key: 'EGG_SESS',
+    maxAge: 24 * 60 * 60 * 1000, // 1 天
+    httpOnly: true,
+    encrypt: true,
   };
 
   // add your user config here
