@@ -6,6 +6,7 @@ class UserService extends Service {
   async login({ username, password }) {
     const userList = await this.app.mysql.select('user', {
       where: { username, password },
+      columns: [ 'username' ],
     });
     if (Array.isArray(userList) && userList.length > 0) {
       return {

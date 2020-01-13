@@ -48,7 +48,7 @@ class HomeController extends Controller {
       });
       ctx.session[user.username] = true;
     }
-    ctx.body = { code };
+    ctx.body = { code, user };
   }
 }
 

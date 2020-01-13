@@ -21,7 +21,8 @@ module.exports = appInfo => {
   // use for cookie sign key, should change to your own and keep security
   config.keys = appInfo.name + '_1578455645058_1425';
 
-  // add your middleware config here
+  // add your middleware config here 数组有值 每个路由都有中间件的拦截  没有值的话  需要在路由中去配
+  // config.middleware = [ 'loginCheckOut' ];
   config.middleware = [ ];
 
   config.mysql = {
