@@ -16,3 +16,6 @@ export function writeArt(params = {}){
 export function writeArtcleDb(params = {}){
     return post('/blog/writeArtcleDb',params)
 }
+export function login(params = {}){
+    return post('/blog/login',params)
+}

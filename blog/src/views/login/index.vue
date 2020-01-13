@@ -3,21 +3,32 @@
         <p class="tit">登录</p>
         <div class="title">
             <p class="label">用户名</p>
-            <input type="text">
+            <input type="text" v-model="loginParams.username">
         </div>
         <div class="title">
             <p class="label">密码</p>
-            <input type="password">
+            <input type="password" v-model="loginParams.password">
         </div>
         <div class="btn">
-            <button>登录</button>
+            <button @click="loginSubimt">登录</button>
         </div>
     </div>
 </template>
 
 <script>
+    import { login } from '@/common/api'
     export default {
-        
+        data() {
+            return {
+                loginParams:{}
+            }
+        },
+        methods: {
+            async loginSubimt(){
+                let res = await login(this.loginParams);
+                console.log(res)
+            }
+        },
     }
 </script>
 
