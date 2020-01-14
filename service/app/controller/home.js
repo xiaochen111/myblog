@@ -38,8 +38,8 @@ class HomeController extends Controller {
 
   async writeArtcleDb() {
     const { ctx } = this;
-    const { title, value } = ctx.request.body;
-    const res = await ctx.service.getArticleSerice.writeArtcleDb(title, value);
+    const { title, value, userId } = ctx.request.body;
+    const res = await ctx.service.getArticleSerice.writeArtcleDb(title, value, userId);
     ctx.body = res;
   }
   async getUserInfo() {

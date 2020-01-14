@@ -12,6 +12,7 @@
 <script>
 import Markdown from "vue-meditor";
 import { writeArt, writeArtcleDb } from '@/common/api'
+import { mapState } from 'vuex'
 export default {
   components: {
     Markdown
@@ -27,13 +28,23 @@ export default {
   methods: {
     async save(){
       // let res = await writeArt(this.source)
-      let res = await writeArtcleDb(this.source)
+      const params = {
+        userId:this.loginInfor.id,
+        ...this.source,
+      }
+      let res = await writeArtcleDb(params)
       if(res.code == 1){
         this.$message.success('保存成功！');
+        setTimeout(()=>{
+          this.$router.push({path:'/listDb',})
+        },1500)
       }else{
         this.$message.fail('保存失败！');
       }
     }
+  },
+  computed:{
+    ...mapState(['loginInfor'])
   },
 };
 </script>

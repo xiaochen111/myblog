@@ -22,8 +22,8 @@ class ArticleService extends Service {
     return result;
   }
 
-  async writeArtcleDb(title, buffer) {
-    const result = await this.app.mysql.insert('article', { title, createTime: new Date().getTime(), content: buffer });
+  async writeArtcleDb(title, buffer, userId) {
+    const result = await this.app.mysql.insert('article', { title, createTime: new Date(), content: buffer, userId });
     result.code = result.affectedRows === 1 ? 1 : 0;
     return result;
   }
@@ -38,6 +38,7 @@ class ArticleService extends Service {
   async getDatabaseList() {
     const article = await this.app.mysql.select('article', {
       columns: [ 'id', 'title', 'createTime' ],
+      orders: [[ 'id', 'desc' ]],
     });
     return article;
   }
