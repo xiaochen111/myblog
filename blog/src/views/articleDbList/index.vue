@@ -1,8 +1,9 @@
 <template>
     <div class="list">
         <ul>
-            <li v-for="(item,index) in list" :key="index" @click="toDetail(item)">
-                {{ item.title }}
+            <li v-for="(item,index) in list" :key="index" @click="toDetail(item.id)">
+                <span>{{ item.title }}</span>
+                <span class="time">{{ item.createTime | formateDate }}</span>
             </li>
         </ul>
     </div>
@@ -25,10 +26,10 @@
                 let res = await getDbArt();
                 this.list = res;
             },
-            toDetail(fileName){
+            toDetail(id){
                 this.$router.push({
-                    path:'/detail',
-                    query:{fileName}
+                    path:'/detailDb',
+                    query:{ id }
                 })
             }
         },
@@ -41,13 +42,16 @@
     }
     ul{
         li{
-            border-bottom:1px solid @border;
+            border-bottom:1px solid @border; display: flex; justify-content: space-between;
             animation: showLi .5s ease-out both;
             &:hover{
                 cursor: pointer;
             }
             a{
                 text-decoration: none; color: @darkColor;
+            }
+            .time{
+                font-size: 12px;
             }
         }
     }

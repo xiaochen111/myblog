@@ -36,7 +36,9 @@ class ArticleService extends Service {
 
   // 操作数据库的service
   async getDatabaseList() {
-    const article = await this.app.mysql.select('article');
+    const article = await this.app.mysql.select('article', {
+      columns: [ 'id', 'title', 'createTime' ],
+    });
     return article;
   }
 
