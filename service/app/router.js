@@ -7,7 +7,7 @@ module.exports = app => {
   const { router, controller } = app;
   const loginCheckOut = app.middleware.loginCheckOut();
   router.get('/', controller.home.index);
-  router.post('/blog/list', controller.home.list);
+  router.post('/blog/list', loginCheckOut, controller.home.list);
   router.post('/blog/md', controller.home.getMdContent);
   router.post('/blog/dbArt', controller.home.getDbArt);
   router.post('/blog/writeArt', loginCheckOut, controller.home.writeArt);

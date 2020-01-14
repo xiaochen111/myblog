@@ -45,12 +45,12 @@ module.exports = appInfo => {
     agent: false,
   };
 
-  config.session = {
-    key: 'EGG_SESS',
-    maxAge: 24 * 60 * 60 * 1000, // 1 天
-    httpOnly: true,
-    encrypt: true,
-  };
+  // config.session = {
+  //   key: 'EGG_SESS',
+  //   maxAge: 24 * 60 * 60 * 1000, // 1 天
+  //   httpOnly: true,
+  //   encrypt: true,
+  // };
 
   // add your user config here
   const userConfig = {

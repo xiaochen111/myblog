@@ -5,7 +5,7 @@ module.exports = () => {
     const name = ctx.cookies.get('username', {
       encrypt: true,
     });
-    console.log(name, ctx.session[name]);
+    console.log(name, ctx.session.maxAge);
     if (name && ctx.session[name]) {
       await next();
     } else {
