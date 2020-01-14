@@ -29,12 +29,28 @@ class HomeController extends Controller {
     const res = await ctx.service.getArticleSerice.getDatabaseList();
     ctx.body = res;
   }
+  async getDbDetail() {
+    const { ctx } = this;
+    const { id } = ctx.request.body;
+    const res = await ctx.service.getArticleSerice.getDbDetail(id);
+    ctx.body = res;
+  }
 
   async writeArtcleDb() {
     const { ctx } = this;
     const { title, value } = ctx.request.body;
     const res = await ctx.service.getArticleSerice.writeArtcleDb(title, value);
     ctx.body = res;
+  }
+  async getUserInfo() {
+    const { ctx } = this;
+    const res = await ctx.service.user.getUserInfo();
+    if (res.code === 1) {
+      ctx.body = res;
+    } else {
+      ctx.status = 401;
+      ctx.body = res;
+    }
   }
 
   async login() {
@@ -46,10 +62,15 @@ class HomeController extends Controller {
       ctx.cookies.set('username', user.username, {
         encrypt: true, // 加密传输
       });
+      ctx.cookies.set('password', user.password, {
+        encrypt: true, // 加密传输
+      });
       ctx.session[user.username] = true;
-      ctx.session.maxAge = 60 * 60 * 1000; // session设置一个小时的过期时间
+      ctx.session.maxAge = 10 * 60 * 1000; // session设置一个小时的过期时间
+      ctx.body = { code, user: { id: user.id, username: user.username } };
+    } else {
+      ctx.body = { code };
     }
-    ctx.body = { code, user };
   }
 }
 

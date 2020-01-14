@@ -10,12 +10,10 @@ const routes = [
   },  
   {
     path: '/home',
-    name: 'home',
     component: resolve => require(["@/views/home"], resolve),
   },
   {
     path: '/index',
-    name: 'index',
     component: resolve => require(["@/views/index"], resolve),
     children:[
       {
@@ -24,40 +22,61 @@ const routes = [
       },
       {
         path: '/list',
-        name: 'list',
         component: resolve => require(["@/views/articleList"], resolve),
+        meta: { requireAuth: true },
       },
       {
         path: '/listDb',
-        name: 'listDb',
         component: resolve => require(["@/views/articleDbList"], resolve),
+        meta: { requireAuth: true },
       },
       {
         path: '/detail',
-        name: 'detail',
         component: resolve => require(["@/views/articleDetail/articleMd"], resolve),
+        meta: { requireAuth: true },
       },
       {
         path: '/detailDb',
-        name: 'detailDb',
-        component: resolve => require(["@/views/articleDbDetail/articleMd"], resolve),
+        component: resolve => require(["@/views/articleDbDetail/article"], resolve),
+        meta: { requireAuth: true },
       },
       {
         path: '/edit',
-        name: 'edit',
         component: resolve => require(["@/views/editMd"], resolve),
+        meta: { requireAuth: true },
       }
     ]
   },
   {
     path: '/login',
-    name: 'login',
     component: resolve => require(["@/views/login"], resolve),
   },
 ]
 
 const router = new VueRouter({
   routes
+})
+
+
+let firstEnter = true;
+
+router.beforeEach((to, from, next)=>{
+  const store = router.app.$options.store;
+  console.log(store)
+  if (to.meta && to.meta.requireAuth && firstEnter) {
+      store.dispatch('getUser').then(code=>{
+        console.log(code)
+        if(code == 1){
+          firstEnter = false;
+          next()
+        }else{
+          console.log('获取个人信息失败')
+          next('/login')
+        }
+      })
+  } else{
+    next()
+  }
 })
 
 export default router

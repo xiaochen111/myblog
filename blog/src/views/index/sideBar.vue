@@ -28,10 +28,13 @@
 
 <script>
     import { mapState } from 'vuex'
-    import { SET_LOGIN_INFOR } from '@/store/moutations-types'
+    import { getUserInfo } from '@/common/api'
     export default {
         computed:{
             ...mapState(['loginState','loginInfor'])
+        },
+        created() {
+            getUserInfo()
         },
     }
 </script>

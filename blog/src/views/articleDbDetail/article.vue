@@ -1,0 +1,58 @@
+<template>
+    <div class="art-detail">
+        <p class="auther">
+            <span>{{ art.username }}</span>
+            <span>{{ art.time }}</span>
+            <span>阅读数：{{ art.readNum }}</span>
+        </p>
+        <p class="tit">{{art.title}}</p>
+        <MarkdownPreview :initialValue="art.content"/>
+    </div>
+</template>
+
+
+<script>
+    import { getDbDetail } from '@/common/api'
+    import { MarkdownPreview } from 'vue-meditor'
+    export default {
+        components:{
+            MarkdownPreview,
+        },
+        data() {
+            return {
+                art:{}
+            }
+        },
+        created() {
+            let id = this.$route.query.id
+            console.log(id)
+            this.getMdContent({id})
+        },
+        methods: {
+            async getMdContent(params){
+                console.log(params)
+                let res = await getDbDetail(params);
+                this.art = res[0];
+            }
+        },
+    }
+</script>
+
+<style lang="less" scoped>
+    .art-detail{
+        box-sizing: border-box; padding: 30px 20px;
+    }
+    .auther{
+        line-height: 1.6; font-size: 14px; color: @lightColor;
+        span{
+            margin-right: 25px;
+        }
+    }
+    .tit{
+        color: @darkColor; line-height: 1.8; font-size: 18px; padding-left: 15px;position: relative;
+        &::after{
+            content: ''; display: block; width: 5px;height: 20px; background:@btnBlue; 
+            position: absolute; left: 0; top: 6px; 
+        }
+    }
+</style>

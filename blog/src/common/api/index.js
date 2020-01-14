@@ -19,3 +19,9 @@ export function writeArtcleDb(params = {}){
 export function login(params = {}){
     return post('/blog/login',params)
 }
+export function getDbDetail(params = {}){
+    return post('/blog/getDbDetail',params)
+}
+export function getUserInfo(params = {}){
+    return post('/blog/getUserInfo',params)
+}

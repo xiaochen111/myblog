@@ -5,6 +5,7 @@
  * 
  */
 export const formateDate = str => {
+    if(!str) return ''
     const date = new Date(str);
     const year = date.getFullYear()
     const month = date.getMonth() + 1

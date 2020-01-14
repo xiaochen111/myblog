@@ -23,7 +23,7 @@ class ArticleService extends Service {
   }
 
   async writeArtcleDb(title, buffer) {
-    const result = await this.app.mysql.insert('article', { title, createTime: new Date(), content: buffer });
+    const result = await this.app.mysql.insert('article', { title, createTime: new Date().getTime(), content: buffer });
     result.code = result.affectedRows === 1 ? 1 : 0;
     return result;
   }
@@ -39,6 +39,17 @@ class ArticleService extends Service {
     const article = await this.app.mysql.select('article', {
       columns: [ 'id', 'title', 'createTime' ],
     });
+    return article;
+  }
+
+  async getDbDetail(id) {
+    const sql = `SELECT 
+      art.title,DATE_FORMAT(art.createTime,'%Y-%m-%d %H:%i:%s') as time,art.content,art.readNum,user.username
+      FROM article AS art 
+      INNER JOIN 
+      user ON art.userId = user.id 
+      WHERE art.id = ${id}`;
+    const article = await this.app.mysql.query(sql);
     return article;
   }
 

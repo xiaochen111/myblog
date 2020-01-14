@@ -13,4 +13,6 @@ module.exports = app => {
   router.post('/blog/writeArt', loginCheckOut, controller.home.writeArt);
   router.post('/blog/writeArtcleDb', loginCheckOut, controller.home.writeArtcleDb);
   router.post('/blog/login', controller.home.login);
+  router.post('/blog/getDbDetail', controller.home.getDbDetail);
+  router.post('/blog/getUserInfo', controller.home.getUserInfo);
 };
