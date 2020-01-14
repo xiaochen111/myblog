@@ -44,14 +44,27 @@ class ArticleService extends Service {
   }
 
   async getDbDetail(id) {
-    const sql = `SELECT 
-      art.title,DATE_FORMAT(art.createTime,'%Y-%m-%d %H:%i:%s') as time,art.content,art.readNum,user.username
-      FROM article AS art 
-      INNER JOIN 
-      user ON art.userId = user.id 
-      WHERE art.id = ${id}`;
-    const article = await this.app.mysql.query(sql);
-    return article;
+    const updataSql = `UPDATE article SET readNum = (readNum+1) where id = ${id}`;
+    const result = await this.app.mysql.query(updataSql);
+    const updateSuccess = result.affectedRows === 1;
+    if (updateSuccess) {
+      const sql = `SELECT 
+        art.title,DATE_FORMAT(art.createTime,'%Y-%m-%d %H:%i:%s') as time,art.content,art.readNum,user.username
+        FROM article AS art 
+        INNER JOIN 
+        user ON art.userId = user.id 
+        WHERE art.id = ${id}`;
+      const article = await this.app.mysql.query(sql);
+      if (article && article.length > 0) {
+        return {
+          art: article,
+          code: 1,
+        };
+      }
+    }
+    return {
+      code: 0,
+    };
   }
 
 }

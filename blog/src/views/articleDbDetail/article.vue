@@ -30,9 +30,10 @@
         },
         methods: {
             async getMdContent(params){
-                console.log(params)
                 let res = await getDbDetail(params);
-                this.art = res[0];
+                if (res.code == 1){
+                    this.art = res.art[0];
+                }
             }
         },
     }
