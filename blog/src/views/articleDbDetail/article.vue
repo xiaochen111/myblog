@@ -1,10 +1,14 @@
 <template>
     <div class="art-detail">
-        <p class="auther">
-            <span>{{ art.username }}</span>
-            <span>{{ art.time }}</span>
-            <span>阅读数：{{ art.readNum }}</span>
-        </p>
+        <div class="auther">
+            <div>
+              <span>作者：{{ art.username }}</span>
+              <span>{{ art.time }}</span>
+              <span>阅读数：{{ art.readNum }}</span>
+              <span>类别：{{ art.type }}</span>
+            </div>
+            <a class="eidt" :href="`#/edit?id=${art.id}`">修改</a>
+        </div>
         <p class="tit">{{art.title}}</p>
         <MarkdownPreview :initialValue="art.content"/>
     </div>
@@ -25,7 +29,6 @@
         },
         created() {
             let id = this.$route.query.id
-            console.log(id)
             this.getMdContent({id})
         },
         methods: {
@@ -44,9 +47,12 @@
         box-sizing: border-box; padding: 30px 20px;
     }
     .auther{
-        line-height: 1.6; font-size: 14px; color: @lightColor; padding: 10px 0;
+        line-height: 1.6; font-size: 14px; color: @lightColor; padding: 10px 0; display: flex; justify-content: space-between; align-items: center;
         span{
             margin-right: 25px;
+        }
+        .eidt{
+          cursor: pointer; color: @btnBlue;
         }
     }
     .tit{

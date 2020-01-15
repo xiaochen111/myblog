@@ -41,14 +41,21 @@ class HomeController extends Controller {
 
   async writeArtcleDb() {
     const { ctx } = this;
-    const { title, value, userId } = ctx.request.body;
-    const res = await ctx.service.articaleDbService.writeArtcleDb(title, value, userId);
+    const params = ctx.request.body;
+    const res = await ctx.service.articaleDbService.writeArtcleDb(params);
     ctx.body = res;
   }
 
   async getTypeList() {
     const { ctx } = this;
     const res = await ctx.service.articaleDbService.getTypeList();
+    ctx.body = res;
+  }
+
+  async eidtArticle() {
+    const { ctx } = this;
+    const params = ctx.request.body;
+    const res = await ctx.service.articaleDbService.eidtArticle(params);
     ctx.body = res;
   }
 

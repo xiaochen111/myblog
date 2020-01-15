@@ -28,3 +28,6 @@ export function getUserInfo(params = {}){
 export function getTypeList(params = {}){
     return post('/blog/getTypeList',params)
 }
+export function eidtArticle(params = {}){
+    return post('/blog/eidtArticle',params)
+}

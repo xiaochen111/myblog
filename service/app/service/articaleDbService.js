@@ -3,8 +3,8 @@
 const Service = require('egg').Service;
 
 class ArticleDbService extends Service {
-  async writeArtcleDb(title, buffer, userId) {
-    const result = await this.app.mysql.insert('article', { title, createTime: new Date(), content: buffer, userId });
+  async writeArtcleDb({ title, content, userId, typeId }) {
+    const result = await this.app.mysql.insert('article', { title, createTime: new Date(), content, userId, typeId });
     result.code = result.affectedRows === 1 ? 1 : 0;
     return result;
   }
@@ -25,10 +25,19 @@ class ArticleDbService extends Service {
     const updateSuccess = result.affectedRows === 1;
     if (updateSuccess) {
       const sql = `SELECT 
-        art.title,DATE_FORMAT(art.createTime,'%Y-%m-%d %H:%i:%s') as time,art.content,art.readNum,user.username
+        art.id,
+        art.title,
+        DATE_FORMAT(art.createTime,'%Y-%m-%d %H:%i:%s') as time,
+        art.content,
+        art.readNum,
+        user.username,
+        type.name as type,
+        art.typeId
         FROM article AS art 
         INNER JOIN 
         user ON art.userId = user.id 
+        INNER JOIN
+        type on art.typeId = type.id
         WHERE art.id = ${id}`;
       const article = await this.app.mysql.query(sql);
       if (article && article.length > 0) {
@@ -42,6 +51,28 @@ class ArticleDbService extends Service {
       code: 0,
     };
   }
+
+  async eidtArticle(articleVo) {
+    const { title, content, userId, typeId, id } = articleVo;
+    // createTime = ${new Date()},
+    const updataSql = `UPDATE article SET 
+      title = '${title}',
+      content='${content}',
+      userId=${userId},
+      typeId=${typeId}
+      where id = ${id}`;
+    const result = await this.app.mysql.query(updataSql);
+    const updateSuccess = result.affectedRows === 1;
+    if (updateSuccess) {
+      return {
+        code: 1,
+      };
+    }
+    return {
+      code: 0,
+    };
+  }
+
   // 获取类型的list
   async getTypeList() {
     const res = await this.app.mysql.select('type');

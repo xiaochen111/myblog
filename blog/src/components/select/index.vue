@@ -1,6 +1,6 @@
 <template>
   <div class="selet-box" v-clickoutside="handleClose">
-    <input type="text" placeholder="请选择" @focus="visible = true" v-model="value">
+    <input type="text" :placeholder="placeholder" @focus="visible = true" v-model="value">
     <ul v-if="visible">
       <li v-for="(item,index) in list" :key="index" @click.stop="pickItem(item)">{{item.name}}</li>
     </ul>
@@ -14,16 +14,25 @@
       return {
         list:[],
         visible:false,
-        value:''
+        value:this.initValue
       }
     },
     props:{
       url:{
         type:String,
         default:'/blog/getTypeList'
+      },
+      placeholder:{
+        type:String,
+        default:'请选择'
+      },
+      initValue:{
+        type:String,
+        default:''
       }
     },
     created() {
+      console.log('select11')
       this.initList()
     },
     methods: {
@@ -58,7 +67,14 @@
             delete el._vueClickOutside_;
         }
       }
-    }
+    },
+    watch: {
+      initValue:{
+        handler(value){
+          this.value = value
+        }
+      }
+    },
   }
 </script>
 

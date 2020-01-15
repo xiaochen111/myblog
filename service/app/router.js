@@ -16,4 +16,5 @@ module.exports = app => {
   router.post('/blog/getDbDetail', controller.home.getDbDetail);
   router.post('/blog/getUserInfo', controller.home.getUserInfo);
   router.post('/blog/getTypeList', controller.home.getTypeList);
+  router.post('/blog/eidtArticle', controller.home.eidtArticle);
 };
