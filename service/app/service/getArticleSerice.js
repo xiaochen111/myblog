@@ -36,10 +36,10 @@ class ArticleService extends Service {
 
   // 操作数据库的service
   async getDatabaseList() {
-    const article = await this.app.mysql.select('article', {
-      columns: [ 'id', 'title', 'createTime' ],
-      orders: [[ 'id', 'desc' ]],
-    });
+    const sql = `SELECT 
+    art.title,DATE_FORMAT(art.createTime,'%Y-%m-%d %H:%i:%s') createTime,art.content,art.id
+    FROM article as art order by id desc`;
+    const article = await this.app.mysql.query(sql);
     return article;
   }
 
