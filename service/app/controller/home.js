@@ -18,30 +18,35 @@ class HomeController extends Controller {
     const res = await ctx.service.getArticleSerice.getDemoMd(fileName);
     ctx.body = res;
   }
+
   async writeArt() {
     const { ctx } = this;
     const { title, value } = ctx.request.body;
     const res = await ctx.service.getArticleSerice.writeArtcle(title, value);
     ctx.body = { code: res };
   }
+
+  // 与数据库交互-----------------------------------------------------------------------------------
   async getDbArt() {
     const { ctx } = this;
-    const res = await ctx.service.getArticleSerice.getDatabaseList();
+    const res = await ctx.service.articaleDbService.getDatabaseList();
     ctx.body = res;
   }
   async getDbDetail() {
     const { ctx } = this;
     const { id } = ctx.request.body;
-    const res = await ctx.service.getArticleSerice.getDbDetail(id);
+    const res = await ctx.service.articaleDbService.getDbDetail(id);
     ctx.body = res;
   }
 
   async writeArtcleDb() {
     const { ctx } = this;
     const { title, value, userId } = ctx.request.body;
-    const res = await ctx.service.getArticleSerice.writeArtcleDb(title, value, userId);
+    const res = await ctx.service.articaleDbService.writeArtcleDb(title, value, userId);
     ctx.body = res;
   }
+
+
   async getUserInfo() {
     const { ctx } = this;
     const res = await ctx.service.user.getUserInfo();
