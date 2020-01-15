@@ -11,16 +11,11 @@ import install from './common/js/install'
 Vue.use(VueFullPage)
   .use(install);
 
-
-import { formateDate } from '@/common/js/utils'
-Vue.filter('formateDate', formateDate)
-
 import 'reset-css';
 import '@/common/font/iconfont.css'
 import '@/common/font/iconfont'
 
 Vue.config.productionTip = false
-
 
 new Vue({
   router,

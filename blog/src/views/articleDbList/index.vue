@@ -3,7 +3,7 @@
         <ul>
             <li v-for="(item,index) in list" :key="index" @click="toDetail(item.id)">
                 <span>{{ item.title }}</span>
-                <span class="time">{{ item.createTime | formateDate }}</span>
+                <span class="time">{{ item.createTime }}</span>
             </li>
         </ul>
     </div>
