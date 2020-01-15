@@ -16,7 +16,7 @@
     import { MarkdownPreview } from 'vue-meditor'
     export default {
         components:{
-            MarkdownPreview,
+            MarkdownPreview
         },
         data() {
             return {
@@ -44,16 +44,17 @@
         box-sizing: border-box; padding: 30px 20px;
     }
     .auther{
-        line-height: 1.6; font-size: 14px; color: @lightColor;
+        line-height: 1.6; font-size: 14px; color: @lightColor; padding: 10px 0;
         span{
             margin-right: 25px;
         }
     }
     .tit{
-        color: @darkColor; line-height: 1.8; font-size: 18px; padding-left: 15px;position: relative;
+        color: @darkColor; line-height: 1.8; font-size: 18px; padding: 15px 0 15px 15px;position: relative;
+        border-bottom: 1px solid @border;
         &::after{
             content: ''; display: block; width: 5px;height: 20px; background:@btnBlue; 
-            position: absolute; left: 0; top: 6px; 
+            position: absolute; left: 0; top: 21px; 
         }
     }
 </style>

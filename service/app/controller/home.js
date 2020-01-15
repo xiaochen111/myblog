@@ -46,6 +46,12 @@ class HomeController extends Controller {
     ctx.body = res;
   }
 
+  async getTypeList() {
+    const { ctx } = this;
+    const res = await ctx.service.articaleDbService.getTypeList();
+    ctx.body = res;
+  }
+
 
   async getUserInfo() {
     const { ctx } = this;

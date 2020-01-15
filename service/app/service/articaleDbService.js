@@ -42,6 +42,11 @@ class ArticleDbService extends Service {
       code: 0,
     };
   }
+  // 获取类型的list
+  async getTypeList() {
+    const res = await this.app.mysql.select('type');
+    return res;
+  }
 }
 
 module.exports = ArticleDbService;

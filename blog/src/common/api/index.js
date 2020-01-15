@@ -25,3 +25,6 @@ export function getDbDetail(params = {}){
 export function getUserInfo(params = {}){
     return post('/blog/getUserInfo',params)
 }
+export function getTypeList(params = {}){
+    return post('/blog/getTypeList',params)
+}

@@ -4,6 +4,9 @@
       <p class="label">标题</p>
       <input type="text" v-model="source.title">
     </div>
+
+    <blog-select @changeValue="item=>{typeId = item.id}"/>
+
     <Markdown v-model="source.value"/>
     <button @click="save">save</button>
   </div>
@@ -21,13 +24,13 @@ export default {
     return {
       source:{
         value:'',
-        title:''
+        title:'',
+        typeId:''
       }
     }
   },
   methods: {
     async save(){
-      // let res = await writeArt(this.source)
       const params = {
         userId:this.loginInfor.id,
         ...this.source,
