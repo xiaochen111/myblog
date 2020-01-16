@@ -81,12 +81,11 @@
 <style lang="less" scoped>
   .selet-box{
       width: 240px; height: 40px;box-sizing: border-box; border: 1px solid @border; border-radius: 3px; margin-bottom: 20px; position: relative;
-      z-index: 9;
       input{
-        width: 100%; line-height: 38px; border: none; outline: none; color: @lightColor; text-indent: 10px;
+        width: 100%; line-height: 38px; border: none; outline: none; color: @lightColor; text-indent: 10px; 
       }
       ul{
-        width: 100%; border: 1px solid @border; border-radius: 3px; left: -1px; position: absolute; top: 48px;
+        width: 100%; border: 1px solid @border; border-radius: 3px; left: -1px; position: absolute; top: 48px;z-index: 10;
         padding: 5px 0;background: #fff;
         &::after{
           content: ''; display: block;  position: absolute; top: -7px; left: 31px;

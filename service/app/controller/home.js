@@ -84,7 +84,7 @@ class HomeController extends Controller {
         encrypt: true, // 加密传输
       });
       ctx.session[user.username] = true;
-      ctx.session.maxAge = 10 * 60 * 1000; // session设置一个小时的过期时间
+      ctx.session.maxAge = 30 * 60 * 1000; // session设置一个小时的过期时间
       ctx.body = { code, user: { id: user.id, username: user.username } };
     } else {
       ctx.body = { code };
