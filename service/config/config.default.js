@@ -1,7 +1,6 @@
 /* eslint valid-jsdoc: "off" */
 
 'use strict';
-
 /**
  * @param {Egg.EggAppInfo} appInfo app info
  */
@@ -11,6 +10,13 @@ module.exports = appInfo => {
    * @type {Egg.EggAppConfig}
    **/
   const config = exports = {};
+
+
+  config.static = {
+    maxAge: 31536000,
+    prefix: '/public',
+    index: 'index.html',
+  };
 
   config.security = {
     csrf: {
