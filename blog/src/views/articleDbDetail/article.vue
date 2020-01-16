@@ -52,7 +52,7 @@
             margin-right: 25px;
         }
         .eidt{
-          cursor: pointer; color: @btnBlue;
+          cursor: pointer; color: @btnBlue; text-decoration: none;
         }
     }
     .tit{
