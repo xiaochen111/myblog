@@ -1,8 +1,15 @@
 <template>
     <div class="list">
+        <blog-tab 
+            :list="typeList"
+            @tabChanged="tabChanged"
+            />
         <ul>
             <li v-for="(item,index) in list" :key="index" @click="toDetail(item.id)">
-                <span>{{ item.title }}</span>
+                <div>
+                    <span>{{ item.title }}</span>
+                    <span class="type">{{ item.name }}</span>
+                </div>
                 <span class="time">{{ item.createTime }}</span>
             </li>
         </ul>
@@ -11,20 +18,29 @@
 
 
 <script>
-    import { getDbArt } from '@/common/api'
+    import { getDbArt, getTypeList } from '@/common/api'
     export default {
         data() {
             return {
-                list:[]
+                list:[],
+                typeList:[]
             }
         },
         created() {
-            this.getlist()
+            this.getlist();
+            this.initTypelist();
         },
         methods: {
-            async getlist(){
-                let res = await getDbArt();
-                this.list = res;
+            async getlist(params={}){
+                this.list = await getDbArt(params);
+            },
+            async initTypelist(){
+                const all = {id:'',name:'全部'}
+                this.typeList = await getTypeList();
+                this.typeList.unshift(all)
+            },
+            tabChanged(item){
+                console.log(item)
             },
             toDetail(id){
                 this.$router.push({
@@ -35,6 +51,7 @@
         },
     }
 </script>
+
 
 <style lang="less" scoped>
     .list{
@@ -52,6 +69,10 @@
             }
             .time{
                 font-size: 12px;
+            }
+            .type{
+                background: @btnBlue; color: #fff; font-size: 12px; display: inline-block;
+                padding: 0px 7px; border-radius: 3px; margin-left: 30px; line-height: 1.7;
             }
         }
     }
