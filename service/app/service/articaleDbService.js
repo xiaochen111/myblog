@@ -11,10 +11,18 @@ class ArticleDbService extends Service {
 
 
   // 操作数据库的service
-  async getDatabaseList() {
+  async getDatabaseList({ id }) {
+    const sqlCondition = id ? `where art.typeId = ${id}` : '';
     const sql = `SELECT 
-    art.title,DATE_FORMAT(art.createTime,'%Y-%m-%d %H:%i:%s') createTime,art.content,art.id
-    FROM article as art order by id desc`;
+      art.title,
+      DATE_FORMAT(art.createTime,'%Y-%m-%d %H:%i:%s') createTime,
+      art.id,
+      type.name
+      FROM article as art
+      left join 
+      type on art.typeId = type.id 
+      ${sqlCondition}
+      order by createTime DESC`;
     const article = await this.app.mysql.query(sql);
     return article;
   }
@@ -54,9 +62,9 @@ class ArticleDbService extends Service {
 
   async eidtArticle(articleVo) {
     const { title, content, userId, typeId, id } = articleVo;
-    // createTime = ${new Date()},
     const updataSql = `UPDATE article SET 
       title = '${title}',
+      createTime = NOW(),
       content='${content}',
       userId=${userId},
       typeId=${typeId}

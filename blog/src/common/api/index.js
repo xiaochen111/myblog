@@ -7,8 +7,8 @@ export function list(){
 export function getMd(params = {}){
     return post('/blog/md',params)
 }
-export function getDbArt(){
-    return post('/blog/dbArt')
+export function getDbArt(params = {}){
+    return post('/blog/dbArt',params)
 }
 export function writeArt(params = {}){
     return post('/blog/writeArt',params)

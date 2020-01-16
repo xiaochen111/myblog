@@ -29,7 +29,8 @@ class HomeController extends Controller {
   // 与数据库交互-----------------------------------------------------------------------------------
   async getDbArt() {
     const { ctx } = this;
-    const res = await ctx.service.articaleDbService.getDatabaseList();
+    const { id } = ctx.request.body;
+    const res = await ctx.service.articaleDbService.getDatabaseList({ id });
     ctx.body = res;
   }
   async getDbDetail() {

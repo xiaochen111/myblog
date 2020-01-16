@@ -40,7 +40,7 @@
                 this.typeList.unshift(all)
             },
             tabChanged(item){
-                console.log(item)
+                this.getlist({id:item.id});
             },
             toDetail(id){
                 this.$router.push({
