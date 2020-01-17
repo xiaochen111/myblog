@@ -76,7 +76,7 @@ class HomeController extends Controller {
     const { ctx } = this;
     const { username, password } = ctx.request.body;
     const res = await ctx.service.user.login({ username, password });
-    const { code, user } = res;
+    const { code, user, message } = res;
     if (code === 1) {
       ctx.cookies.set('username', user.username, {
         encrypt: true, // 加密传输
@@ -88,7 +88,7 @@ class HomeController extends Controller {
       ctx.session.maxAge = 30 * 60 * 1000; // session设置一个小时的过期时间
       ctx.body = { code, user: { id: user.id, username: user.username } };
     } else {
-      ctx.body = { code };
+      ctx.body = { code, message };
     }
   }
 }
