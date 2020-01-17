@@ -1,5 +1,5 @@
 <template>
-    <div id="left-bar">
+    <div id="left-bar" :style="scrollFlag?fixedStyle:''">
         <div class="left-box">
             <div class="site-meta">
                 前端博客
@@ -30,11 +30,36 @@
     import { mapState } from 'vuex'
     import { getUserInfo } from '@/common/api'
     export default {
+        data() {
+            return {
+                scrollFlag:false,
+                fixedStyle:''
+            }
+        },
         computed:{
             ...mapState(['loginState','loginInfor'])
         },
         created() {
             getUserInfo()
+        },
+        mounted() {
+            this.scroll();
+            document.addEventListener('scroll',this.scroll)
+        },
+        destroyed() {
+            document.removeEventListener('scroll',this.scroll)
+        },
+        methods: {
+            scroll(){
+                let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+                const width = document.body.clientWidth
+                if(scrollTop>0){
+                    this.scrollFlag = true;
+                    this.fixedStyle = `position: fixed; top: 0; left: ${width/2 - 600}px;`
+                }else{
+                    this.scrollFlag = false;
+                }
+            }
         },
     }
 </script>
