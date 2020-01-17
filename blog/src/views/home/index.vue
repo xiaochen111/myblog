@@ -11,6 +11,18 @@
         page3
       </div>
     </full-page>
+
+    <ul>
+      <li @click="toPage(1)">
+        <span></span>
+      </li>
+      <li @click="toPage(2)">
+        <span></span>
+      </li>
+      <li @click="toPage(3)">
+        <span></span>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -22,7 +34,7 @@ export default {
         licenseKey: 'OPEN-SOURCE-GPLV3-LICENSE',
         // menu: '#menu',
         // anchors: ['page1', 'page2', 'page3'],
-        sectionsColor: ['#41b883', '#ff5f45', '#0798ec'],
+        sectionsColor: ['#41b883', '#ff5f45', '#fff'],
         afterLoad:this.afterLoad
       }
     };
@@ -36,6 +48,9 @@ export default {
     afterLoad: function(origin, destination, direction){
       // console.log(origin, destination, direction)
       console.log(destination.index)
+    },
+    toPage(index){
+      this.$refs.fullpage.api.moveTo(index, 0)
     }
   }
 };
@@ -44,5 +59,16 @@ export default {
 <style lang="less" scoped>
     #home {
         color: @chatColor;
+        ul{
+          position: fixed; right: 50px; top: 50%; transform: translateY(-50%);
+          width: 50px;
+          li{
+            width: 50px; height: 30px; text-align: center; line-height: 30px; 
+            span{
+              display: inline-block; width: 15px; height: 15px; background: @btnBlue; border-radius: 50%; 
+              cursor: pointer;
+            }
+          }
+        }
     }
 </style>
