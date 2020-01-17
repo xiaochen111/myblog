@@ -43,11 +43,12 @@
             list:{
                 handler(arr){
                     this.listArr = arr
-                    setTimeout(()=>{
+                    this.$nextTick(()=>{
+                        // console.log('dom更新')
                         const tab = document.querySelector('#tab0')
                         const currentDomStyle = document.defaultView.getComputedStyle(tab,null);
                         this.currentStyle =`width:${currentDomStyle.width}`
-                    },50) 
+                    })
                 }
             }
         },
