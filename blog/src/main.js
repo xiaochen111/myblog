@@ -14,6 +14,7 @@ Vue.use(VueFullPage)
 import 'reset-css';
 import '@/common/font/iconfont.css'
 import '@/common/font/iconfont'
+import 'animate.css'
 
 Vue.config.productionTip = false
 

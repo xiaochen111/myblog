@@ -2,10 +2,10 @@
   <div id="home">
     <full-page :options="options" @after-load="afterLoad" ref="fullpage">
       <div class="section">
-        page1
+        <page-one :currentPage="currentPage"/>
       </div>
       <div class="section">
-            <div>kjj</div>
+        <page-two :currentPage="currentPage"/>
       </div>
       <div class="section">
           <div>
@@ -51,34 +51,41 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      options: {
-        licenseKey: 'OPEN-SOURCE-GPLV3-LICENSE',
-        sectionsColor: ['#41b883', '#ff5f45', '#fff'],
-        afterLoad:this.afterLoad
-      },
-      currentPage:1,
-    };
-  },
-  mounted() {
-    // console.log(this.$refs.fullpage)
-    // console.log(this.$refs.fullpage.api.moveTo)
-    // this.$refs.fullpage.api.moveTo(3, 0)
-  },
-  methods: {
-    afterLoad: function(origin, destination, direction){
-      // console.log(origin, destination, direction)
-      console.log(destination.index)
-      this.currentPage = destination.index + 1;
+  import pageOne from './pageOne'
+  import pageTwo from './pageTwo'
+  import pageThree from './pageThree'
+
+  export default {
+    components:{
+      pageOne,pageTwo,pageThree
     },
-    toPage(index){
-      this.currentPage = index;
-      this.$refs.fullpage.api.moveTo(index, 0)
+    data() {
+      return {
+        options: {
+          licenseKey: 'OPEN-SOURCE-GPLV3-LICENSE',
+          sectionsColor: ['#41b883', '#ECEADF', '#f1f1f1'],
+          afterLoad:this.afterLoad
+        },
+        currentPage:1,
+      };
+    },
+    mounted() {
+      // console.log(this.$refs.fullpage)
+      // console.log(this.$refs.fullpage.api.moveTo)
+      // this.$refs.fullpage.api.moveTo(3, 0)
+    },
+    methods: {
+      afterLoad: function(origin, destination, direction){
+        // console.log(origin, destination, direction)
+        console.log(destination.index)
+        this.currentPage = destination.index + 1;
+      },
+      toPage(index){
+        this.currentPage = index;
+        this.$refs.fullpage.api.moveTo(index, 0)
+      }
     }
-  }
-};
+  };
 </script>
 
 <style lang="less" scoped>
