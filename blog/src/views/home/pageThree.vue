@@ -8,7 +8,7 @@
                     非常渴望和学习新的技术，爱“折腾”，能够独立把学到的新技术运用到自己的项目中。
                 </p>
                 <p class="intro animated" :class="{'bounceInDown':currentPage==3}" style="animation-delay:.8s">联系我吧：chb0413@163.com</p>
-                <a href="#/list" class="animated" :class="{'bounceInUp':currentPage==3}" style="animation-delay:1.6s">
+                <a href="#/list" class="link animated" :class="{'bounceInUp':currentPage==3}" style="animation-delay:1.6s">
                     <svg class="icon" aria-hidden="true">
                         <use xlink:href="#icon-bowenboke"></use>
                     </svg> 
@@ -30,7 +30,7 @@
         height: 100%; position: relative;
     }
     .page3 {
-        padding-top: 45px; width: 800px;
+        width: 800px; padding-bottom: 100px;
         text-align: center;
         box-sizing: border-box;
         cursor: pointer;position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
@@ -40,5 +40,8 @@
     }
     .intro{
         text-align: center; line-height: 1.4; margin-bottom: 20px;
+    }
+    .link{
+        padding-top: 30px; display: inline-block; text-align: center; text-decoration: none;
     }
 </style>
