@@ -56,5 +56,7 @@ module.exports = {
         // config.resolve.alias.set('vue$', 'vue/dist/vue.esm.js')
     },
 
+    productionSourceMap : false,
+
     
 }

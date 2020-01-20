@@ -22,7 +22,10 @@
     export default {
         data() {
             return {
-                loginParams:{}
+                loginParams:{
+                    username:'xiaochen',
+                    password:'123456'
+                }
             }
         },
         mounted() {

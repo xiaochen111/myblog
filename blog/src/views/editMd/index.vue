@@ -44,6 +44,8 @@ export default {
   },
   methods: {
     async save(){
+      let voidflag = this.voidBoolean();
+      if(!voidflag) return
       const params = {
         userId:this.loginInfor.id,
         ...this.source,
@@ -65,6 +67,8 @@ export default {
         }
     },
     async eidt(){
+        let voidflag = this.voidBoolean();
+        if(!voidflag) return
         const params = {
           userId:this.loginInfor.id,
           ...this.source,
@@ -76,6 +80,21 @@ export default {
               this.$router.push({path:'/listDb',})
             },1500)
         }
+    },
+    voidBoolean(){
+      if(!this.source.title.trim()){
+        this.$message.fail('请填写标题');
+        return false
+      }
+      if(!this.source.typeId){
+        this.$message.fail('请选择类别');
+        return false
+      }
+      if(!this.source.content.trim()){
+        this.$message.fail('请填写笔记');
+        return false
+      }
+      return true
     }
   },
   computed:{

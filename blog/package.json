@@ -10,6 +10,7 @@
     "animate.css": "^3.7.2",
     "axios": "^0.19.0",
     "core-js": "^3.4.3",
+    "echarts": "^4.6.0",
     "reset-css": "^5.0.1",
     "vue": "^2.6.10",
     "vue-fullpage.js": "^0.1.5",
