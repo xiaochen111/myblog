@@ -67,6 +67,13 @@
       "font_class": "tips_careful",
       "unicode": "e688",
       "unicode_decimal": 59016
+    },
+    {
+      "icon_id": "9893698",
+      "name": "暂无数据",
+      "font_class": "zanwushuju",
+      "unicode": "e685",
+      "unicode_decimal": 59013
     }
   ]
 }
