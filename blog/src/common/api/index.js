@@ -31,3 +31,6 @@ export function getTypeList(params = {}){
 export function eidtArticle(params = {}){
     return post('/blog/eidtArticle',params)
 }
+export function visitNum(params = {}){
+    return post('/blog/visitNum',params)
+}

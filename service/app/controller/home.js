@@ -26,6 +26,12 @@ class HomeController extends Controller {
     ctx.body = { code: res };
   }
 
+  async visitNum() {
+    const { ctx } = this;
+    const res = await ctx.service.getArticleSerice.visitNum();
+    ctx.body = { visitNum: res };
+  }
+
   // 与数据库交互-----------------------------------------------------------------------------------
   async getDbArt() {
     const { ctx } = this;

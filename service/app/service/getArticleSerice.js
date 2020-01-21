@@ -28,6 +28,15 @@ class ArticleService extends Service {
     return result;
   }
 
+  async visitNum() {
+    const filePath = path.join(__dirname, '../static/visitNum.txt');
+    const visitNum = await readFile(filePath);
+    await writeFile(filePath, visitNum * 1 + 1);
+    const visitNumNew = await readFile(filePath);
+    return visitNumNew;
+  }
+
+
 }
 
 
