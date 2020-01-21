@@ -34,3 +34,6 @@ export function eidtArticle(params = {}){
 export function visitNum(params = {}){
     return post('/blog/visitNum',params)
 }
+export function writeComment(params = {}){
+    return post('/blog/writeComment',params)
+}

@@ -11,6 +11,9 @@
         </div>
         <p class="tit">{{art.title}}</p>
         <MarkdownPreview :initialValue="art.content"/>
+
+        <comment :list="art.list" :articaleId="articaleId"/>
+        
     </div>
 </template>
 
@@ -18,17 +21,20 @@
 <script>
     import { getDbDetail } from '@/common/api'
     import { MarkdownPreview } from 'vue-meditor'
+    import comment from './comment'
     export default {
         components:{
-            MarkdownPreview
+            MarkdownPreview,comment
         },
         data() {
             return {
-                art:{}
+                art:{},
+                articaleId:''
             }
         },
         created() {
             let id = this.$route.query.id
+            this.articaleId = id*1;
             this.getMdContent({id})
         },
         methods: {
@@ -63,4 +69,5 @@
             position: absolute; left: 0; top: 21px; 
         }
     }
+    
 </style>

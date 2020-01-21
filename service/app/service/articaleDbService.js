@@ -32,6 +32,7 @@ class ArticleDbService extends Service {
     const result = await this.app.mysql.query(updataSql);
     const updateSuccess = result.affectedRows === 1;
     if (updateSuccess) {
+      // 查询详情
       const sql = `SELECT 
         art.id,
         art.title,
@@ -48,12 +49,42 @@ class ArticleDbService extends Service {
         type on art.typeId = type.id
         WHERE art.id = ${id}`;
       const article = await this.app.mysql.query(sql);
+      // 查询详情的评论
+      const commentSql = `SELECT comment, 
+        DATE_FORMAT(time,'%Y-%m-%d %H:%i:%s') as time,
+        user.username as commentUser 
+        from comments 
+        INNER JOIN 
+        user on comments.commentUserId = user.id  
+        WHERE articaleId = ${id}
+        order by time DESC`;
+      const articleComment = await this.app.mysql.query(commentSql);
       if (article && article.length > 0) {
+        article[0].list = articleComment;
         return {
           art: article,
           code: 1,
         };
       }
+    }
+    return {
+      code: 0,
+    };
+  }
+
+  async writeComment(commentVo) {
+    const { comment, articaleId, commentUserId } = commentVo;
+    const result = await this.app.mysql.insert('comments', {
+      comment,
+      articaleId,
+      commentUserId,
+      time: new Date(),
+    });
+    const updateSuccess = result.affectedRows === 1;
+    if (updateSuccess) {
+      return {
+        code: 1,
+      };
     }
     return {
       code: 0,

@@ -66,6 +66,13 @@ class HomeController extends Controller {
     ctx.body = res;
   }
 
+  async writeComment() {
+    const { ctx } = this;
+    const params = ctx.request.body;
+    const res = await ctx.service.articaleDbService.writeComment(params);
+    ctx.body = res;
+  }
+
 
   async getUserInfo() {
     const { ctx } = this;
