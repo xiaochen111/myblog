@@ -4,7 +4,7 @@
             :list="typeList"
             @tabChanged="tabChanged"
             />
-        <ul>
+        <ul v-if="list.length">
             <li v-for="(item,index) in list" :key="index" @click="toDetail(item.id)">
                 <div>
                     <span>{{ item.title }}</span>
@@ -13,6 +13,11 @@
                 <span class="time">{{ item.createTime }}</span>
             </li>
         </ul>
+        <div class="no-data" v-else>
+            <svg class="icon" aria-hidden="true">
+                <use  xlink:href="#icon-zanwushuju"></use>
+            </svg>
+        </div>
     </div>
 </template>
 
@@ -74,6 +79,12 @@
                 background: @btnBlue; color: #fff; font-size: 12px; display: inline-block;
                 padding: 0px 7px; border-radius: 3px; margin-left: 30px; line-height: 1.7;
             }
+        }
+    }
+    .no-data{
+        height: 400px; display: flex; justify-content: space-around; align-items: center;
+        .icon{
+            width: 200px; height: 200px;
         }
     }
     @keyframes showLi {
