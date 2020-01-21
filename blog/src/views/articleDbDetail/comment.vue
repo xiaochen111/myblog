@@ -3,12 +3,17 @@
         <p class="tit-comment">评论</p>
         <input type="text" placeholder="输入评论，友好交流，按回车键提交" v-model="comment" @keyup.enter="submit">
 
-        <ul class="comments-box">
+        <ul class="comments-box" v-if="listArr.length">
             <li v-for="(item,index) in listArr" :key="index">
                 <p class="top"><span>{{listArr.length - index}}楼</span><span>{{item.commentUser}}</span><span>{{item.time}}</span></p>
                 <p class="txt">{{item.comment}}</p>
             </li>
         </ul>
+        <div class="no-data" v-else>
+            <svg class="icon" aria-hidden="true">
+                <use  xlink:href="#icon-zanwupinglun"></use>
+            </svg>
+        </div>
     </div>
 </template>
 
@@ -89,6 +94,12 @@
             .txt{
                 font-size: 14px; color: @darkColor; line-height: 1.6;
             }
+        }
+    }
+    .no-data{
+        height: 200px; display: flex; justify-content: space-around; align-items: center;
+        .icon{
+            width: 100px; height: 100px;
         }
     }
 </style>
