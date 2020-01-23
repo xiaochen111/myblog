@@ -20,7 +20,7 @@
         <div class="my-info" v-if="loginState">
             <div class="pic">
                 <div class="avatar">
-                    <img :src="loginInfor.avatar || avatar" alt="">
+                    <img :src="loginInfor.avatar || avatar" alt="" @error="imgload">
                     <input type="file" name="" id="" @change="file">
                 </div>
                 <p>{{loginInfor.username}}</p>
@@ -38,7 +38,7 @@
                 scrollFlag:false,
                 fixedStyle:'',
                 currentPage:0,
-                avatar:'../../assets/22739609.jpg'
+                avatar:''
             }
         },
         computed:{
@@ -71,6 +71,9 @@
                     // this.avatar = res.url
                     this.$store.dispatch('getUser')
                 }
+            },
+            imgload(e) {
+                e.target.src = "../../assets/22739609.jpg";
             }
         },
     }
