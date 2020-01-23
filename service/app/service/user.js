@@ -15,7 +15,7 @@ class UserService extends Service {
     }
     const userList = await this.app.mysql.select('user', {
       where: { username, password },
-      columns: [ 'username', 'id', 'password' ],
+      columns: [ 'username', 'id', 'password', 'avatar' ],
     });
     if (Array.isArray(userList) && userList.length > 0) {
       return {
@@ -39,10 +39,10 @@ class UserService extends Service {
         where: { username, password },
       });
       if (Array.isArray(userList) && userList.length > 0) {
-        const { id, username } = userList[0];
+        const { id, username, avatar } = userList[0];
         return {
           code: 1,
-          user: { id, username },
+          user: { id, username, avatar },
         };
       }
     }

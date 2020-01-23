@@ -95,5 +95,15 @@ export async function post(url,data={}){
   }
 };
 
+export async function uploadFile(url,data={}){
+  let method = 'POST';
+  try {
+    let res = await axios({url,data,method});
+    return res.data;
+  } catch (error) {
+    throw new Error(error)
+  }
+};
+
 
 

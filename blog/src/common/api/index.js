@@ -1,4 +1,4 @@
-import { post } from '../js/axios'
+import { post, uploadFile } from '../js/axios'
 
 // list
 export function list(){
@@ -36,4 +36,7 @@ export function visitNum(params = {}){
 }
 export function writeComment(params = {}){
     return post('/blog/writeComment',params)
+}
+export function upload(params = {}){
+    return uploadFile('/blog/upload',params)
 }

@@ -9,26 +9,26 @@ class HomeController extends Controller {
   }
   async list() {
     const { ctx } = this;
-    const res = await ctx.service.getArticleSerice.getList();
+    const res = await ctx.service.getArticleService.getList();
     ctx.body = res;
   }
   async getMdContent() {
     const { ctx } = this;
     const { fileName } = ctx.request.body;
-    const res = await ctx.service.getArticleSerice.getDemoMd(fileName);
+    const res = await ctx.service.getArticleService.getDemoMd(fileName);
     ctx.body = res;
   }
 
   async writeArt() {
     const { ctx } = this;
     const { title, value } = ctx.request.body;
-    const res = await ctx.service.getArticleSerice.writeArtcle(title, value);
+    const res = await ctx.service.getArticleService.writeArtcle(title, value);
     ctx.body = { code: res };
   }
 
   async visitNum() {
     const { ctx } = this;
-    const res = await ctx.service.getArticleSerice.visitNum();
+    const res = await ctx.service.getArticleService.visitNum();
     ctx.body = { visitNum: res };
   }
 
@@ -97,13 +97,21 @@ class HomeController extends Controller {
       ctx.cookies.set('password', user.password, {
         encrypt: true, // 加密传输
       });
-      ctx.session[user.username] = true;
+      ctx.session[user.username] = { user };
       ctx.session.maxAge = 30 * 60 * 1000; // session设置一个小时的过期时间
       ctx.body = { code, user: { id: user.id, username: user.username } };
     } else {
       ctx.body = { code, message };
     }
   }
+
+  async upload() {
+    const { ctx } = this;
+    const stream = await ctx.getFileStream();
+    const res = await ctx.service.uploadService.upload(stream);
+    ctx.body = res;
+  }
+
 }
 
 

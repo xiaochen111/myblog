@@ -19,4 +19,5 @@ module.exports = app => {
   router.post('/blog/getTypeList', loginCheckOut, controller.home.getTypeList);
   router.post('/blog/eidtArticle', loginCheckOut, controller.home.eidtArticle);
   router.post('/blog/writeComment', loginCheckOut, controller.home.writeComment);
+  router.post('/blog/upload', loginCheckOut, controller.home.upload);
 };
