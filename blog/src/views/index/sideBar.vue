@@ -73,7 +73,7 @@
                 }
             },
             imgload(e) {
-                e.target.src = "../../assets/22739609.jpg";
+                e.target.src = require("../../assets/22739609.jpg");
             }
         },
     }
